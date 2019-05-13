@@ -19,7 +19,7 @@ public class User {
     
     public static User getUser(String login,  String pass) throws Exception{
         Connection con = Db.getConnection();
-        String SQL = "SELECT * FROM USER"
+        String SQL = "SELECT * FROM USERS "
                 + "WHERE LOGIN=? AND PASSWORDHASH=?";
         PreparedStatement st = con.prepareStatement(SQL);
         st.setString(1, login);

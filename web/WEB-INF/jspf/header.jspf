@@ -1,9 +1,44 @@
+<%@page import="br.com.fatecpg.parking.db.User"%>
 <h1>WebParking</h1>
+<%
+    String exceptionMessage = null;
+    if (request.getParameter("loginForm") != null) {
+        try {
+            String login = request.getParameter("login");
+            String password = request.getParameter("password");
+            User u = User.getUser(login, password);
+            if (u == null) {
+                exceptionMessage = "Usuario/senha invalido(s)!";
 
+            } else {
+                session.setAttribute("userlogin", u.getLogin());
+                session.setAttribute("userName", u.getName());
+                session.setAttribute("userRole", u.getRole());
+            }
+        } catch (Exception e) {
+            exceptionMessage = e.getMessage();
+        }
+    } else if (request.getParameter("logoffForm") != null) {
+        session.removeAttribute("userlogin");
+        session.removeAttribute("userName");
+        session.removeAttribute("userRole");
+    }
+
+%>
+<%    if (exceptionMessage != null) {%>
+<h3 style ="color : red"><%=exceptionMessage%></h3>
+<%}%> 
+<%if (session.getAttribute("userlogin") != null) {%>
+<form method ="post">
+    Bem vindo, <%=session.getAttribute("userName")%>
+    <input type="submit" name="logoffForm" value="Sair"/>
+</form>
+
+<%} else {%>
 <form method="post">
-  login:  <input type="text" name="login"/>
+    login:  <input type="text" name="login"/>
     senha:<input type="password" name="password"/>
     <input type="submit" name="loginForm" value="Entrar"/>
-    
 </form>
+<%}%>
 <hr/>

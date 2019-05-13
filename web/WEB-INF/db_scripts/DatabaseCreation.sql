@@ -7,7 +7,7 @@ GENERATED ALWAYS AS IDENTITY
 ,role varchar (200)not null
 ,name varchar (200)not null
 ,login varchar (200)not null
-,passswordHash BIGINT not null
+,passwordHash BIGINT not null
 );
 
 INSERT INTO users VALUES
