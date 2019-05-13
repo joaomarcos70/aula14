@@ -1,0 +1,9 @@
+<h1>WebParking</h1>
+
+<form method="post">
+  login:  <input type="text" name="login"/>
+    senha:<input type="password" name="password"/>
+    <input type="submit" name="loginForm" value="Entrar"/>
+    
+</form>
+<hr/>
